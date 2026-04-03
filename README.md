@@ -49,7 +49,7 @@ To run this project locally, ensure you have the following installed:
    ```bash
    git clone [https://github.com/mtepenner/brevity-sharing.git](https://github.com/mtepenner/brevity-sharing.git)
    cd brevity-sharing
-````
+   ```
 
 2.  **Set up environment variables:**
     Copy the example environment file in the infrastructure folder:
