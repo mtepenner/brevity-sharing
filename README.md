@@ -106,7 +106,7 @@ Contributions are welcome\! If you'd like to help improve Brevity, please follow
 4.  Push to the branch (`git push origin feature/AmazingFeature`).
 5.  Open a Pull Request using the provided PR template.
 
-Please review our [Bug Report](https://github.com/mtepenner/brevity-sharing/.github/tree/main/.github/ISSUE_TEMPLATE/bug_report.md) template if you encounter any issues.
+Please review our [Bug Report](https://github.com/mtepenner/brevity-sharing/tree/main/.github/ISSUE_TEMPLATE/bug_report.md) template if you encounter any issues.
 
 ## 📄 License
 
