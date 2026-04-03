@@ -1,0 +1,11 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Keep web scrapers out of private user areas
+Disallow: /settings/
+Disallow: /messages/
+Disallow: /api/
+
+# Point to your sitemap (you will generate this later when deploying)
+Sitemap: https://brevity-sharing.com/sitemap.xml
