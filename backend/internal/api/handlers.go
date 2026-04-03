@@ -40,10 +40,11 @@ func (s *Server) HandlePostTweet(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(tweet)
 }
 
-// HandleGetTimeline returns the reverse-chronological feed
+// Updated HandleGetTimeline using our new packages
 func (s *Server) HandleGetTimeline(w http.ResponseWriter, r *http.Request) {
-	tweets := s.DB.GetTimeline()
+    // 1. Ask the service layer for the data
+    tweets := s.TimelineService.GetHomeFeed()
 
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(tweets)
+    // 2. Use the pkg/response utility to send it back
+    response.JSON(w, http.StatusOK, tweets)
 }
