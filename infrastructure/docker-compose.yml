@@ -38,7 +38,7 @@ services:
     build:
       context: ../backend
       dockerfile: Dockerfile
-    container_name: brevity-backend
+    container_name: backend
     restart: always
     ports:
       - "8080:8080"
@@ -61,7 +61,7 @@ services:
     build:
       context: ../frontend
       dockerfile: Dockerfile
-    container_name: brevity-frontend
+    container_name: frontend
     restart: always
     ports:
       - "80:80"
