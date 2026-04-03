@@ -1,1 +1,81 @@
+services:
+  # ----------------------------------------
+  # PostgreSQL Database
+  # ----------------------------------------
+  db:
+    image: postgres:15-alpine
+    container_name: brevity-db
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USER:-brevity_user}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-super_secret_password}
+      POSTGRES_DB: ${DB_NAME:-brevity_db}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - brevity-network
 
+  # ----------------------------------------
+  # Redis Cache (For the timeline feed)
+  # ----------------------------------------
+  cache:
+    image: redis:7-alpine
+    container_name: brevity-cache
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redisdata:/data
+    networks:
+      - brevity-network
+
+  # ----------------------------------------
+  # Go Backend API
+  # ----------------------------------------
+  backend:
+    build:
+      context: ../backend
+      dockerfile: Dockerfile
+    container_name: brevity-backend
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      - DB_HOST=db
+      - DB_USER=${DB_USER:-brevity_user}
+      - DB_PASSWORD=${DB_PASSWORD:-super_secret_password}
+      - DB_NAME=${DB_NAME:-brevity_db}
+      - REDIS_HOST=cache
+    depends_on:
+      - db
+      - cache
+    networks:
+      - brevity-network
+
+  # ----------------------------------------
+  # React Frontend (Nginx)
+  # ----------------------------------------
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
+    container_name: brevity-frontend
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - brevity-network
+
+# Define named volumes so DB data isn't lost when containers restart
+volumes:
+  pgdata:
+  redisdata:
+
+# Define a custom network so containers can talk to each other securely
+networks:
+  brevity-network:
+    driver: bridge
