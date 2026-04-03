@@ -1,0 +1,47 @@
+name: Backend CI
+
+# Only run this workflow if files inside the backend directory change
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - 'backend/**'
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - 'backend/**'
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    
+    # Specify the working directory for all steps in this job
+    defaults:
+      run:
+        working-directory: ./backend
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: '1.22'
+        cache-dependency-path: backend/go.sum
+
+    - name: Download dependencies
+      run: go mod download
+
+    - name: Check formatting
+      run: if [ "$(gofmt -s -l . | wc -l)" -gt 0 ]; then exit 1; fi
+
+    - name: Run vet (Static Analysis)
+      run: go vet ./...
+
+    - name: Build
+      run: go build -v ./cmd/api
+
+    # Once you add tests, you'll uncomment this:
+    # - name: Test
+    #   run: go test -v ./...
