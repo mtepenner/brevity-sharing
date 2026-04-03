@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="brevityGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#60A5FA;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2563EB;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <rect width="512" height="512" rx="120" fill="url(#brevityGrad)" />
+  
+  <path d="M160 140 H300 C355 140 380 170 380 210 C380 245 360 260 320 265 C370 270 395 295 395 340 C395 390 355 420 280 420 H160 V140 Z" 
+        fill="none" 
+        stroke="#FFFFFF" 
+        stroke-width="48" 
+        stroke-linecap="round" 
+        stroke-linejoin="round"/>
+        
+  <line x1="160" y1="270" x2="300" y2="270" stroke="#FFFFFF" stroke-width="48" stroke-linecap="round" />
+</svg>
