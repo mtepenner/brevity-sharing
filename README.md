@@ -47,7 +47,7 @@ To run this project locally, ensure you have the following installed:
 
 1. **Clone the repository:**
    ```bash
-   git clone [https://github.com/mtepenner/brevity-sharing.git](https://github.com/mtepenner/brevity-sharing.git)
+   git clone https://github.com/mtepenner/brevity-sharing.git
    cd brevity-sharing
    ```
 
