@@ -6,10 +6,13 @@ import (
 
 	"github.com/mtepenner/brevity-sharing/internal/database"
 	"github.com/mtepenner/brevity-sharing/internal/models"
+	"github.com/mtepenner/brevity-sharing/internal/services" // ADDED
+	"github.com/mtepenner/brevity-sharing/pkg/response"      // ADDED
 )
 
 type Server struct {
-	DB *database.InMemoryDB
+	DB              *database.InMemoryDB
+	TimelineService *services.TimelineService // ADDED
 }
 
 // HandlePostTweet processes incoming tweets
