@@ -1,37 +1,73 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
   <defs>
-    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#60A5FA" />
-      <stop offset="100%" stop-color="#1D4ED8" />
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3B82F6" />   <stop offset="100%" stop-color="#6D28D9" />  </linearGradient>
+
+    <linearGradient id="extrusionGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#4C1D95" />
+      <stop offset="100%" stop-color="#2E1065" />
     </linearGradient>
 
-    <filter id="shadow" x="-10%" y="-10%" width="130%" height="130%">
-      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#001540" flood-opacity="0.35"/>
-    </filter>
-
-    <linearGradient id="whiteGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+    <linearGradient id="topFaceGrad" x1="0%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%" stop-color="#FFFFFF" />
-      <stop offset="100%" stop-color="#E2E8F0" />
+      <stop offset="100%" stop-color="#E0E7FF" /> 
     </linearGradient>
+
+    <filter id="shadow3D" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="15" dy="20" stdDeviation="12" flood-color="#17172B" flood-opacity="0.6"/>
+    </filter>
+    
+    <filter id="textShadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="4" dy="6" stdDeviation="5" flood-color="#17172B" flood-opacity="0.5"/>
+    </filter>
   </defs>
 
   <rect width="512" height="512" rx="110" fill="url(#bgGrad)" />
   
-  <rect width="508" height="508" x="2" y="2" rx="108" fill="none" stroke="#BFDBFE" stroke-width="4" opacity="0.2" />
+  <rect width="508" height="508" x="2" y="2" rx="108" fill="none" stroke="#C4B5FD" stroke-width="4" opacity="0.25" />
 
-  <g filter="url(#shadow)">
+  <g filter="url(#shadow3D)">
     
+    <path transform="translate(15, 15)" 
+          d="M185 100 H295 C345 100 380 125 380 165 C380 195 360 215 330 225 C375 235 405 265 405 315 C405 365 360 395 290 395 H185 Z 
+             M235 145 V225 H290 C320 225 335 210 335 185 C335 160 320 145 290 145 Z 
+             M235 265 V350 H295 C335 350 350 335 350 305 C350 275 335 265 295 265 Z" 
+          fill="url(#extrusionGrad)" />
+          
+    <path transform="translate(10, 10)" 
+          d="M185 100 H295 C345 100 380 125 380 165 C380 195 360 215 330 225 C375 235 405 265 405 315 C405 365 360 395 290 395 H185 Z 
+             M235 145 V225 H290 C320 225 335 210 335 185 C335 160 320 145 290 145 Z 
+             M235 265 V350 H295 C335 350 350 335 350 305 C350 275 335 265 295 265 Z" 
+          fill="url(#extrusionGrad)" opacity="0.8"/>
+          
+    <path transform="translate(5, 5)" 
+          d="M185 100 H295 C345 100 380 125 380 165 C380 195 360 215 330 225 C375 235 405 265 405 315 C405 365 360 395 290 395 H185 Z 
+             M235 145 V225 H290 C320 225 335 210 335 185 C335 160 320 145 290 145 Z 
+             M235 265 V350 H295 C335 350 350 335 350 305 C350 275 335 265 295 265 Z" 
+          fill="url(#extrusionGrad)" opacity="0.9"/>
+
     <path d="M185 100 H295 C345 100 380 125 380 165 C380 195 360 215 330 225 C375 235 405 265 405 315 C405 365 360 395 290 395 H185 Z 
              M235 145 V225 H290 C320 225 335 210 335 185 C335 160 320 145 290 145 Z 
              M235 265 V350 H295 C335 350 350 335 350 305 C350 275 335 265 295 265 Z" 
-          fill="url(#whiteGrad)" />
+          fill="url(#topFaceGrad)" />
+  </g>
 
+  <g filter="url(#textShadow)">
+    <text x="258" y="462" 
+          font-family="'Montserrat', 'SF Pro Display', 'Segoe UI', sans-serif" 
+          font-size="46" 
+          font-weight="800" 
+          fill="#4C1D95" 
+          text-anchor="middle" 
+          letter-spacing="10">BREVITY</text>
+          
     <text x="256" y="460" 
           font-family="'Montserrat', 'SF Pro Display', 'Segoe UI', sans-serif" 
           font-size="46" 
           font-weight="800" 
-          fill="url(#whiteGrad)" 
+          fill="url(#topFaceGrad)" 
           text-anchor="middle" 
           letter-spacing="10">BREVITY</text>
   </g>
 </svg>
+
