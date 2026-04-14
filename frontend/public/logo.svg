@@ -1,19 +1,37 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
   <defs>
-    <linearGradient id="brevityGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#60A5FA;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#2563EB;stop-opacity:1" />
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#60A5FA" />
+      <stop offset="100%" stop-color="#1D4ED8" />
+    </linearGradient>
+
+    <filter id="shadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#001540" flood-opacity="0.35"/>
+    </filter>
+
+    <linearGradient id="whiteGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="100%" stop-color="#E2E8F0" />
     </linearGradient>
   </defs>
+
+  <rect width="512" height="512" rx="110" fill="url(#bgGrad)" />
   
-  <rect width="512" height="512" rx="120" fill="url(#brevityGrad)" />
-  
-  <path d="M160 140 H300 C355 140 380 170 380 210 C380 245 360 260 320 265 C370 270 395 295 395 340 C395 390 355 420 280 420 H160 V140 Z" 
-        fill="none" 
-        stroke="#FFFFFF" 
-        stroke-width="48" 
-        stroke-linecap="round" 
-        stroke-linejoin="round"/>
-        
-  <line x1="160" y1="270" x2="300" y2="270" stroke="#FFFFFF" stroke-width="48" stroke-linecap="round" />
+  <rect width="508" height="508" x="2" y="2" rx="108" fill="none" stroke="#BFDBFE" stroke-width="4" opacity="0.2" />
+
+  <g filter="url(#shadow)">
+    
+    <path d="M185 100 H295 C345 100 380 125 380 165 C380 195 360 215 330 225 C375 235 405 265 405 315 C405 365 360 395 290 395 H185 Z 
+             M235 145 V225 H290 C320 225 335 210 335 185 C335 160 320 145 290 145 Z 
+             M235 265 V350 H295 C335 350 350 335 350 305 C350 275 335 265 295 265 Z" 
+          fill="url(#whiteGrad)" />
+
+    <text x="256" y="460" 
+          font-family="'Montserrat', 'SF Pro Display', 'Segoe UI', sans-serif" 
+          font-size="46" 
+          font-weight="800" 
+          fill="url(#whiteGrad)" 
+          text-anchor="middle" 
+          letter-spacing="10">BREVITY</text>
+  </g>
 </svg>
