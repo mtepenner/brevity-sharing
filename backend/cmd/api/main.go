@@ -4,17 +4,22 @@ import (
 	"log"
 	"net/http"
 
-	"https://github.com/mtepenner/brevity-sharing/internal/api"
-	"https://github.com/mtepenner/brevity-sharing/internal/database"
+	"github.com/mtepenner/brevity-sharing/internal/api"      // FIXED
+	"github.com/mtepenner/brevity-sharing/internal/database" // FIXED
+	"github.com/mtepenner/brevity-sharing/internal/services" // ADDED
 )
 
 func main() {
 	// Initialize our thread-safe in-memory database
 	db := database.NewInMemoryDB()
 
-	// Initialize our API server with the DB dependency injected
+	// Initialize the timeline service
+	timelineService := services.NewTimelineService(db) // ADDED
+
+	// Initialize our API server with the DB and Service dependencies injected
 	srv := &api.Server{
-		DB: db,
+		DB:              db,
+		TimelineService: timelineService, // ADDED
 	}
 
 	// Define our routes (Requires Go 1.22+ for method-based routing)
