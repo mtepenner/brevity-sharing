@@ -7,7 +7,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/yourusername/twitter-clone/internal/models"
+	"github.com/mtepenner/brevity-sharing/internal/models" // FIXED
 )
 
 // InMemoryDB simulates a database connection
