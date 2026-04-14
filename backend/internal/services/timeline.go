@@ -1,9 +1,10 @@
 package services
 
 import (
-	"https://github.com/mtepenner/brevity-sharing/internal/database"
-	"https://github.com/mtepenner/brevity-sharing/internal/models"
+	"github.com/mtepenner/brevity-sharing/internal/database" 
+	"github.com/mtepenner/brevity-sharing/internal/models"   
 )
+
 
 // TimelineService isolates the logic for building user feeds
 type TimelineService struct {
