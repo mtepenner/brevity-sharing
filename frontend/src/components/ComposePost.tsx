@@ -28,28 +28,58 @@ export const ComposePost: React.FC<ComposePostProps> = ({ onPostCreated }) => {
     }
   };
 
+  const charPercentage = (content.length / 280) * 100;
+
   return (
-    <div className="border-b border-gray-200 p-4">
-      <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-        <textarea
-          className="w-full resize-none outline-none text-lg placeholder-gray-500"
-          placeholder="What's happening?"
-          rows={3}
-          maxLength={280}
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          disabled={isSubmitting}
-        />
-        <div className="flex justify-between items-center">
-          <span className="text-sm text-gray-400">
-            {content.length}/280
-          </span>
+    <div className="border-b border-gray-200 p-4 bg-white/50 backdrop-blur-sm">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <div className="flex gap-4">
+          {/* Avatar */}
+          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white font-bold shrink-0 shadow-md">
+            M
+          </div>
+          
+          {/* Compose Area */}
+          <div className="flex-1">
+            <textarea
+              className="w-full resize-none outline-none text-lg placeholder-gray-400 bg-transparent rounded-lg p-3 border border-gray-200 hover:border-indigo-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 transition-all"
+              placeholder="What's happening?!"
+              rows={3}
+              maxLength={280}
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              disabled={isSubmitting}
+            />
+          </div>
+        </div>
+        
+        {/* Character Counter and Button */}
+        <div className="flex justify-between items-center px-3">
+          <div className="flex items-center gap-2">
+            <div className="w-10 h-1 bg-gray-200 rounded-full overflow-hidden">
+              <div 
+                className={`h-full rounded-full transition-all duration-200 ${
+                  charPercentage > 90 ? 'bg-red-500' :
+                  charPercentage > 70 ? 'bg-yellow-500' :
+                  'bg-gradient-to-r from-indigo-500 to-purple-500'
+                }`}
+                style={{ width: `${Math.min(charPercentage, 100)}%` }}
+              />
+            </div>
+            <span className={`text-xs font-medium ${
+              charPercentage > 90 ? 'text-red-500' :
+              charPercentage > 70 ? 'text-yellow-500' :
+              'text-gray-500'
+            }`}>
+              {content.length}/280
+            </span>
+          </div>
           <button
             type="submit"
             disabled={!content.trim() || isSubmitting}
-            className="bg-blue-500 text-white px-4 py-2 rounded-full font-bold hover:bg-blue-600 disabled:opacity-50 transition-colors"
+            className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-6 py-2 rounded-full font-bold hover:from-indigo-600 hover:to-purple-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-md hover:shadow-lg smooth-transition"
           >
-            {isSubmitting ? 'Posting...' : 'Post'}
+            {isSubmitting ? '✨ Posting...' : '✨ Post'}
           </button>
         </div>
       </form>

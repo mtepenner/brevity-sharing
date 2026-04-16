@@ -6,6 +6,7 @@ import (
 
 	"github.com/mtepenner/brevity-sharing/internal/api"      // FIXED
 	"github.com/mtepenner/brevity-sharing/internal/database" // FIXED
+	"github.com/mtepenner/brevity-sharing/internal/models"   // ADDED
 	"github.com/mtepenner/brevity-sharing/internal/services" // ADDED
 )
 
@@ -20,12 +21,33 @@ func main() {
 	srv := &api.Server{
 		DB:              db,
 		TimelineService: timelineService, // ADDED
+		Users:           make(map[string]*models.User),
+		UserPasswords:   make(map[string]string),
+		FriendRequests:  make(map[string]*models.FriendRequest),
+		Locations:       make(map[string]*models.Location),
 	}
 
 	// Define our routes (Requires Go 1.22+ for method-based routing)
 	mux := http.NewServeMux()
+	
+	// Auth routes
+	mux.HandleFunc("POST /api/auth/login", api.EnableCORS(srv.HandleLogin))
+	mux.HandleFunc("POST /api/auth/signup", api.EnableCORS(srv.HandleSignup))
+	
+	// Tweet routes
 	mux.HandleFunc("POST /api/tweets", api.EnableCORS(srv.HandlePostTweet))
 	mux.HandleFunc("GET /api/timeline", api.EnableCORS(srv.HandleGetTimeline))
+	
+	// Social/Friend routes
+	mux.HandleFunc("GET /api/users/search", api.EnableCORS(srv.HandleSearchUsers))
+	mux.HandleFunc("POST /api/friends/requests", api.EnableCORS(srv.HandleSendFriendRequest))
+	mux.HandleFunc("GET /api/friends/requests", api.EnableCORS(srv.HandleGetFriendRequests))
+	mux.HandleFunc("POST /api/friends/requests/accept", api.EnableCORS(srv.HandleAcceptFriendRequest))
+	mux.HandleFunc("GET /api/users/friends", api.EnableCORS(srv.HandleGetUserFriends))
+	
+	// Location routes
+	mux.HandleFunc("POST /api/locations", api.EnableCORS(srv.HandleShareLocation))
+	mux.HandleFunc("GET /api/locations/nearby", api.EnableCORS(srv.HandleGetNearbyUsers))
 
 	// Start the server
 	port := ":8080"

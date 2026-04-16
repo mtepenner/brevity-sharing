@@ -4,6 +4,38 @@
 
 @layer base {
   body {
-    @apply bg-gray-100 text-gray-900 antialiased;
+    @apply bg-gradient-to-br from-indigo-50 via-blue-50 to-purple-100 text-gray-900 antialiased font-sans;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold text-gray-800;
+  }
+}
+
+@layer components {
+  .avatar-gradient {
+    @apply bg-gradient-to-br from-blue-500 to-purple-500;
+  }
+
+  .avatar-gradient-alt {
+    @apply bg-gradient-to-br from-indigo-500 to-blue-500;
+  }
+
+  .tweet-container {
+    @apply relative border-b border-gray-100 p-4 hover:bg-gray-50/50 transition-all duration-200 cursor-pointer;
+  }
+
+  .tweet-container:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  }
+}
+
+@layer utilities {
+  .smooth-transition {
+    @apply transition-all duration-200 ease-in-out;
+  }
+
+  .glow-sm {
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.1);
   }
 }
