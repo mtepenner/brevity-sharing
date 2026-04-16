@@ -32,4 +32,4 @@ COPY --from=builder /backend /backend
 EXPOSE 8080
 
 # Execute the binary
-ENTRYPOINT ["/twitter-backend"]
+ENTRYPOINT ["/backend"]
