@@ -61,3 +61,26 @@ export interface Location {
   place?: string;
   created_at: string;
 }
+
+export interface Message {
+  id: string;
+  sender_id: string;
+  recipient_id: string;
+  content: string;
+  created_at: string;
+  read_at?: string;
+}
+
+export interface Conversation {
+  partner_id: string;
+  partner_username: string;
+  last_message?: Message;
+  unread_count: number;
+}
+
+export interface TrendingTopic {
+  topic: string;
+  count: number;
+}
+
+export type Page = 'home' | 'explore' | 'messages' | 'notifications' | 'profile' | 'settings';

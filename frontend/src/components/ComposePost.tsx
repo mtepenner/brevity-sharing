@@ -31,7 +31,7 @@ export const ComposePost: React.FC<ComposePostProps> = ({ onPostCreated }) => {
   const charPercentage = (content.length / 280) * 100;
 
   return (
-    <div className="border-b border-gray-200 p-4 bg-white/50 backdrop-blur-sm">
+    <div className="border-b border-gray-200 dark:border-gray-700 p-4 bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm">
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <div className="flex gap-4">
           {/* Avatar */}
@@ -42,7 +42,7 @@ export const ComposePost: React.FC<ComposePostProps> = ({ onPostCreated }) => {
           {/* Compose Area */}
           <div className="flex-1">
             <textarea
-              className="w-full resize-none outline-none text-lg placeholder-gray-400 bg-transparent rounded-lg p-3 border border-gray-200 hover:border-indigo-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 transition-all"
+              className="w-full resize-none outline-none text-lg placeholder-gray-400 dark:placeholder-gray-500 bg-transparent text-gray-900 dark:text-gray-100 rounded-lg p-3 border border-gray-200 dark:border-gray-700 hover:border-indigo-300 dark:hover:border-indigo-600 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 dark:focus:ring-indigo-900 transition-all"
               placeholder="What's happening?!"
               rows={3}
               maxLength={280}
@@ -63,6 +63,7 @@ export const ComposePost: React.FC<ComposePostProps> = ({ onPostCreated }) => {
                   charPercentage > 70 ? 'bg-yellow-500' :
                   'bg-gradient-to-r from-indigo-500 to-purple-500'
                 }`}
+                // eslint-disable-next-line react/forbid-dom-props
                 style={{ width: `${Math.min(charPercentage, 100)}%` }}
               />
             </div>

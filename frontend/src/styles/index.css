@@ -12,6 +12,17 @@
   }
 }
 
+/* Dark mode overrides for body background */
+.dark body {
+  background: #0f172a;
+  background-image: none;
+  color: #f1f5f9;
+}
+
+.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+  color: #e2e8f0;
+}
+
 @layer components {
   .avatar-gradient {
     @apply bg-gradient-to-br from-blue-500 to-purple-500;

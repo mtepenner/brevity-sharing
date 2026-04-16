@@ -1,4 +1,4 @@
-import { Tweet, CreateTweetRequest, LoginRequest, SignupRequest, AuthResponse, User, FriendRequest, Location } from '../types';
+import { Tweet, CreateTweetRequest, LoginRequest, SignupRequest, AuthResponse, User, FriendRequest, Location, Message, Conversation, TrendingTopic } from '../types';
 
 // Use relative path so nginx can proxy it to the backend
 const API_URL = '/api';
@@ -220,5 +220,60 @@ export const api = {
       console.error('Get nearby users error:', error);
       throw error;
     }
-  }
+  },
+
+  // Message endpoints
+  async sendMessage(senderId: string, recipientId: string, content: string): Promise<Message> {
+    const response = await fetch(`${API_URL}/messages`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
+      body: JSON.stringify({ sender_id: senderId, recipient_id: recipientId, content }),
+    });
+    if (!response.ok) throw new Error('Failed to send message');
+    return response.json();
+  },
+
+  async getConversations(userId: string): Promise<Conversation[]> {
+    try {
+      const response = await fetch(`${API_URL}/messages/conversations?user_id=${encodeURIComponent(userId)}`, {
+        headers: getAuthHeaders(),
+      });
+      if (!response.ok) throw new Error('Failed to fetch conversations');
+      const data = await response.json();
+      return data || [];
+    } catch (error) {
+      console.error('Get conversations error:', error);
+      return [];
+    }
+  },
+
+  async getConversation(user1: string, user2: string): Promise<Message[]> {
+    try {
+      const response = await fetch(
+        `${API_URL}/messages/conversation?user1=${encodeURIComponent(user1)}&user2=${encodeURIComponent(user2)}`,
+        { headers: getAuthHeaders() },
+      );
+      if (!response.ok) throw new Error('Failed to fetch conversation');
+      const data = await response.json();
+      return data || [];
+    } catch (error) {
+      console.error('Get conversation error:', error);
+      return [];
+    }
+  },
+
+  // Trending topics
+  async getTrendingTopics(): Promise<TrendingTopic[]> {
+    try {
+      const response = await fetch(`${API_URL}/trending`, {
+        headers: getAuthHeaders(),
+      });
+      if (!response.ok) return [];
+      const data = await response.json();
+      return data || [];
+    } catch (error) {
+      console.error('Get trending error:', error);
+      return [];
+    }
+  },
 };

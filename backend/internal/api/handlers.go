@@ -18,6 +18,7 @@ type Server struct {
 	UserPasswords   map[string]string         // In-memory password storage (demo only)
 	FriendRequests  map[string]*models.FriendRequest
 	Locations       map[string]*models.Location
+	Messages        map[string]*models.Message
 }
 
 // HandleLogin authenticates a user

@@ -25,6 +25,7 @@ func main() {
 		UserPasswords:   make(map[string]string),
 		FriendRequests:  make(map[string]*models.FriendRequest),
 		Locations:       make(map[string]*models.Location),
+		Messages:        make(map[string]*models.Message),
 	}
 
 	// Define our routes (Requires Go 1.22+ for method-based routing)
@@ -48,6 +49,14 @@ func main() {
 	// Location routes
 	mux.HandleFunc("POST /api/locations", api.EnableCORS(srv.HandleShareLocation))
 	mux.HandleFunc("GET /api/locations/nearby", api.EnableCORS(srv.HandleGetNearbyUsers))
+
+	// Message routes
+	mux.HandleFunc("POST /api/messages", api.EnableCORS(srv.HandleSendMessage))
+	mux.HandleFunc("GET /api/messages/conversations", api.EnableCORS(srv.HandleGetConversations))
+	mux.HandleFunc("GET /api/messages/conversation", api.EnableCORS(srv.HandleGetConversation))
+
+	// Trending route
+	mux.HandleFunc("GET /api/trending", api.EnableCORS(srv.HandleGetTrending))
 
 	// Start the server
 	port := ":8080"

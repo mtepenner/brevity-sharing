@@ -27,26 +27,26 @@ export const PostCard: React.FC<PostCardProps> = ({ tweet }) => {
   };
 
   return (
-    <div className="tweet-container group">
+    <div className="tweet-container group border-b border-gray-100 dark:border-gray-700 p-4 hover:bg-gray-50/50 dark:hover:bg-gray-800/50 transition-all duration-200 cursor-pointer">
       <div className="flex gap-4">
         {/* Avatar */}
         <div className={`w-12 h-12 rounded-full ${getAvatarGradient(tweet.author)} flex items-center justify-center text-white font-bold shrink-0 shadow-md`}>
           {tweet.author.charAt(0).toUpperCase()}
         </div>
         
-        <div className="flex flex-col w-full">
+        <div className="flex flex-col w-full min-w-0">
           {/* Author Info */}
           <div className="flex items-center gap-2 mb-1">
-            <span className="font-bold text-gray-900 hover:text-indigo-600 smooth-transition">{tweet.author}</span>
-            <span className="text-sm text-gray-400">•</span>
-            <span className="text-sm text-gray-500">{formattedDate}</span>
+            <span className="font-bold text-gray-900 dark:text-gray-100 hover:text-indigo-600 dark:hover:text-indigo-400 smooth-transition">{tweet.author}</span>
+            <span className="text-sm text-gray-400 dark:text-gray-500">•</span>
+            <span className="text-sm text-gray-500 dark:text-gray-400">{formattedDate}</span>
           </div>
           
           {/* Content */}
-          <p className="text-gray-800 leading-relaxed whitespace-pre-wrap mb-3">{tweet.content}</p>
+          <p className="text-gray-800 dark:text-gray-200 leading-relaxed whitespace-pre-wrap mb-3 break-words">{tweet.content}</p>
           
           {/* Action Buttons */}
-          <div className="flex gap-8 text-gray-500 text-sm opacity-0 group-hover:opacity-100 smooth-transition">
+          <div className="flex gap-8 text-gray-500 dark:text-gray-400 text-sm opacity-0 group-hover:opacity-100 smooth-transition">
             <button className="flex items-center gap-2 hover:text-blue-500 smooth-transition">
               <span>💬</span>
               <span className="text-xs">Reply</span>

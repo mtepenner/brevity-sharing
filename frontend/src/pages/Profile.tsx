@@ -1,102 +1,79 @@
 import React, { useState } from 'react';
 import { PostCard } from '../components/PostCard';
-import { Tweet } from '../types';
+import { Tweet, User } from '../types';
 
-interface UserProfile {
-  id: string;
-  name: string;
-  handle: string;
-  bio: string;
-  avatar: string;
-  followers: number;
-  following: number;
-  joinDate: string;
+interface ProfileProps {
+  user: User;
 }
 
-export const Profile: React.FC = () => {
-  const [user] = useState<UserProfile>({
-    id: '1',
-    name: 'John Doe',
-    handle: '@johndoe',
-    bio: 'Software engineer | Coffee enthusiast | Open source contributor',
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=johndoe',
-    followers: 1234,
-    following: 567,
-    joinDate: 'January 2024',
-  });
-
-  // Mock user tweets
+export const Profile: React.FC<ProfileProps> = ({ user }) => {
+  // Mock tweets for the logged-in user (replace with API call as the app grows)
   const [userTweets] = useState<Tweet[]>([
     {
       id: '1',
-      author: user.name,
-      content: 'Just launched my new project!',
+      author: user.username,
+      content: 'Just joined Brevity! 👋',
       created_at: new Date(Date.now() - 3600000).toISOString(),
     },
     {
       id: '2',
-      author: user.name,
-      content: 'Wednesday tip: Always write tests for your code',
+      author: user.username,
+      content: 'Loving the minimalist design of this platform.',
       created_at: new Date(Date.now() - 86400000).toISOString(),
     },
   ]);
 
+  const joinDate = user.created_at
+    ? new Date(user.created_at).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
+    : 'Recently';
+
   return (
-    <main className="w-full max-w-xl bg-white min-h-screen shadow-sm border-x border-gray-200">
+    <main className="w-full bg-white dark:bg-gray-900 min-h-screen">
       {/* Header */}
-      <header className="sticky top-0 z-10 bg-white/80 backdrop-blur-md border-b border-gray-200 p-4">
-        <h1 className="text-xl font-bold">Profile</h1>
+      <header className="sticky top-0 z-10 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 p-4">
+        <h1 className="text-xl font-bold text-gray-900 dark:text-gray-100">Profile</h1>
       </header>
 
-      {/* Profile Card */}
-      <div className="bg-white border-b border-gray-200">
-        {/* Cover Photo */}
-        <div className="h-32 bg-gradient-to-r from-blue-400 to-purple-400"></div>
+      {/* Profile card */}
+      <div className="border-b border-gray-200 dark:border-gray-700">
+        {/* Cover */}
+        <div className="h-32 bg-gradient-to-r from-indigo-400 to-purple-500" />
 
-        {/* Profile Info */}
         <div className="px-4 pb-4">
           {/* Avatar */}
           <div className="-mt-16 mb-4">
-            <img
-              src={user.avatar}
-              alt={user.name}
-              className="w-32 h-32 rounded-full border-4 border-white bg-gray-100"
-            />
+            <div className="w-24 h-24 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 border-4 border-white dark:border-gray-900 flex items-center justify-center text-white text-3xl font-bold shadow-lg">
+              {user.username[0].toUpperCase()}
+            </div>
           </div>
 
-          {/* User Details */}
-          <div className="mb-4">
-            <h2 className="text-2xl font-bold text-gray-900">{user.name}</h2>
-            <p className="text-gray-500">{user.handle}</p>
+          {/* Details */}
+          <div className="mb-3">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+              {user.username}
+            </h2>
+            <p className="text-gray-500 dark:text-gray-400 text-sm">{user.email}</p>
           </div>
 
-          {/* Bio */}
-          <p className="text-gray-700 mb-4">{user.bio}</p>
+          {user.bio && (
+            <p className="text-gray-700 dark:text-gray-300 mb-3">{user.bio}</p>
+          )}
 
-          {/* Stats */}
-          <div className="flex gap-4 text-sm text-gray-500 mb-4">
-            <span>
-              <strong className="text-gray-900">{user.followers}</strong> Followers
-            </span>
-            <span>
-              <strong className="text-gray-900">{user.following}</strong> Following
-            </span>
-            <span>Joined {user.joinDate}</span>
+          <div className="flex gap-4 text-sm text-gray-500 dark:text-gray-400 mb-4">
+            <span>📅 Joined {joinDate}</span>
           </div>
 
-          {/* Action Button */}
-          <button className="w-full px-4 py-2 bg-blue-500 text-white rounded-full font-semibold hover:bg-blue-600 transition">
+          <button className="w-full px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full font-semibold transition">
             Edit Profile
           </button>
         </div>
       </div>
 
-      {/* User's Tweets */}
-      <div className="border-t border-gray-200">
-        <div className="px-4 py-3 bg-gray-50 border-b border-gray-200">
-          <h3 className="font-bold text-gray-900">Posts</h3>
+      {/* User tweets */}
+      <div>
+        <div className="px-4 py-3 bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+          <h3 className="font-bold text-gray-900 dark:text-gray-100">Posts</h3>
         </div>
-
         {userTweets.length > 0 ? (
           <div className="flex flex-col">
             {userTweets.map((tweet) => (
@@ -104,7 +81,7 @@ export const Profile: React.FC = () => {
             ))}
           </div>
         ) : (
-          <div className="p-8 text-center text-gray-500">No posts yet</div>
+          <div className="p-8 text-center text-gray-500 dark:text-gray-400">No posts yet</div>
         )}
       </div>
     </main>
