@@ -24,7 +24,7 @@ type Server struct {
 // HandleLogin authenticates a user
 func (s *Server) HandleLogin(w http.ResponseWriter, r *http.Request) {
 	var req models.LoginRequest
-	
+
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		http.Error(w, "Invalid request payload", http.StatusBadRequest)
 		return
@@ -70,7 +70,7 @@ func (s *Server) HandleLogin(w http.ResponseWriter, r *http.Request) {
 // HandleSignup creates a new user account
 func (s *Server) HandleSignup(w http.ResponseWriter, r *http.Request) {
 	var req models.SignupRequest
-	
+
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		http.Error(w, "Invalid request payload", http.StatusBadRequest)
 		return
@@ -112,7 +112,7 @@ func (s *Server) HandleSignup(w http.ResponseWriter, r *http.Request) {
 // HandlePostTweet processes incoming tweets
 func (s *Server) HandlePostTweet(w http.ResponseWriter, r *http.Request) {
 	var req models.CreateTweetRequest
-	
+
 	// Decode the JSON body
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		http.Error(w, "Invalid request payload", http.StatusBadRequest)
@@ -139,11 +139,11 @@ func (s *Server) HandlePostTweet(w http.ResponseWriter, r *http.Request) {
 
 // Updated HandleGetTimeline using our new packages
 func (s *Server) HandleGetTimeline(w http.ResponseWriter, r *http.Request) {
-    // 1. Ask the service layer for the data
-    tweets := s.TimelineService.GetHomeFeed()
+	// 1. Ask the service layer for the data
+	tweets := s.TimelineService.GetHomeFeed()
 
-    // 2. Use the pkg/response utility to send it back
-    response.JSON(w, http.StatusOK, tweets)
+	// 2. Use the pkg/response utility to send it back
+	response.JSON(w, http.StatusOK, tweets)
 }
 
 // Helper functions

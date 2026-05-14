@@ -35,7 +35,7 @@ func (s *Server) HandleSearchUsers(w http.ResponseWriter, r *http.Request) {
 // HandleSendFriendRequest sends a friend request from one user to another
 func (s *Server) HandleSendFriendRequest(w http.ResponseWriter, r *http.Request) {
 	var req struct {
-		ToUserID string `json:"to_user_id"`
+		ToUserID   string `json:"to_user_id"`
 		FromUserID string `json:"from_user_id"`
 	}
 
